@@ -1,4 +1,4 @@
-package com.zxj.cloud_service_proxy_core.util;
+package com.zxj.fast_io_core.util;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
