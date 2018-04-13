@@ -63,7 +63,7 @@ public final class BeanUtils {
      * @param skipTargetHave
      * @return
      */
-    public static <T> T methodCopy(T source, T target, boolean skipSourceNull, boolean skipTargetHave) {
+    public static <T> T fieldsCopy(T source, T target, boolean skipSourceNull, boolean skipTargetHave) {
         List<Field> fields = getFields(target);
         return (T) convert(source, target, fields, skipSourceNull, skipTargetHave);
     }
