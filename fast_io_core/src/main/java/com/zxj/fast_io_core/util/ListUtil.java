@@ -1,6 +1,9 @@
 package com.zxj.fast_io_core.util;
+
 import java.lang.annotation.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * list 工具集
@@ -353,7 +356,7 @@ public class ListUtil {
      */
     public static <SourceData, TargetData, KeyData> List<SourceData> compareDealWithData(List<SourceData> sourceDatas, List<TargetData> targetDatas, ObjectKeyTransfer<KeyData, SourceData, TargetData> objectKeyTransfer, CompareDataSuccess<SourceData, TargetData> compareDataSuccess, AfterSetDataListener<SourceData, TargetData> afterSetDataListener) {
         if (sourceDatas == null || targetDatas == null) return null;
-        HashMap<KeyData, List<TargetData>> temp = new HashMap<>();  //用来存放数组a中的元素
+        HashMap<KeyData, List<TargetData>> targetDataMap = new HashMap<>();
         for (TargetData targetData : targetDatas) {
             if (targetData == null) continue;
             KeyData key = null;
@@ -363,38 +366,36 @@ public class ListUtil {
                 e.printStackTrace();
             }
             if (key == null) continue;
-            List<TargetData> targetDataNode = temp.get(key);
+            List<TargetData> targetDataNode = targetDataMap.get(key);
             if (targetDataNode == null) {
                 targetDataNode = new ArrayList<>();
                 targetDataNode.add(targetData);
-                temp.put(key, targetDataNode);
+                targetDataMap.put(key, targetDataNode);
             } else {
                 targetDataNode.add(targetData);
             }
         }
         for (SourceData sourceData : sourceDatas) {
-            //把数组b中的元素添加到temp中
             if (sourceData == null) continue;
             KeyData key = objectKeyTransfer.getSourceKey(sourceData);
             if (key == null) continue;
-            List<TargetData> targetDataNode = temp.get(key);
-            if (targetDataNode != null && targetDataNode.size() != 0) {
-                for (TargetData targetData : targetDataNode) {
-                    if (compareDataSuccess != null) try {
-                        compareDataSuccess.compareDataSuccess(sourceData, targetData);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (afterSetDataListener != null) try {
-                        afterSetDataListener.setData(sourceData, targetData);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            List<TargetData> targetDataNode = targetDataMap.get(key);
+            if (targetDataNode == null && targetDataNode.size() == 0) continue;
+            for (TargetData targetData : targetDataNode) {
+                if (compareDataSuccess != null) try {
+                    compareDataSuccess.compareDataSuccess(sourceData, targetData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (afterSetDataListener != null) try {
+                    afterSetDataListener.setData(sourceData, targetData);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
-        temp.clear();
-        temp = null;
+        targetDataMap.clear();
+        targetDataMap = null;
         return sourceDatas;
     }
 }
