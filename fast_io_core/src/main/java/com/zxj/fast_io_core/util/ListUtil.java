@@ -147,7 +147,7 @@ public class ListUtil {
      * @param <Source>
      * @return
      */
-    public static <Source> List<Integer> getIntegerList(List<Source> list, IntegerTransfer<Source> integerTransfer) {
+    public static <Source> List<Integer> getList(List<Source> list, IntegerTransfer<Source> integerTransfer) {
         return getTransferResultList(list, t -> integerTransfer.transfer(t));
     }
 
@@ -155,12 +155,12 @@ public class ListUtil {
      * list 取id 集合
      *
      * @param list
-     * @param sourceStringTransfer
+     * @param stringTransfer
      * @param <Source>
      * @return
      */
-    public static <Source> List<String> getStringList(List<Source> list, StringTransfer<Source> sourceStringTransfer) {
-        return getTransferResultList(list, t -> sourceStringTransfer.transfer(t));
+    public static <Source> List<String> getList(List<Source> list, StringTransfer<Source> stringTransfer) {
+        return getTransferResultList(list, t -> stringTransfer.transfer(t));
     }
 
     /**
