@@ -224,16 +224,33 @@ public final class BeanUtils {
             fieldList.addAll(Arrays.asList(tempClass.getDeclaredFields()));
             tempClass = tempClass.getSuperclass(); // 得到父类,然后赋给自己
         }
+        for (Field field:fieldList){
+            field.setAccessible(true);
+        }
         return fieldList;
     }
 
+    /**
+     *
+     * @param source class or object
+     * @param name
+     * @return
+     */
     public static Field getField(Object source, String name) {
-        Class tempClass = source.getClass();
+        Class tempClass = null;
+        if( source instanceof Class){
+            tempClass = (Class) source;
+        }else {
+            tempClass = source.getClass();
+        }
         while (tempClass != null) {// 当父类为null的时候说明到达了最上层的父类(Object类).
-            Field fields = null;
+            Field field = null;
             try {
-                fields = tempClass.getDeclaredField(name);
-                if (fields != null) return fields;
+                field = tempClass.getDeclaredField(name);
+                if (field != null){
+                    field.setAccessible(true);
+                    return field;
+                }
             } catch (Exception e) {
             }
             tempClass = tempClass.getSuperclass(); // 得到父类,然后赋给自己
