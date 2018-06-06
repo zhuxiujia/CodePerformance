@@ -237,12 +237,7 @@ public final class BeanUtils {
      * @return
      */
     public static Field getField(Object source, String name) {
-        Class tempClass = null;
-        if( source instanceof Class){
-            tempClass = (Class) source;
-        }else {
-            tempClass = source.getClass();
-        }
+       Class tempClass = source.getClass();
         while (tempClass != null) {// 当父类为null的时候说明到达了最上层的父类(Object类).
             Field field = null;
             try {
