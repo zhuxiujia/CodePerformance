@@ -380,7 +380,7 @@ public class ListUtil {
             KeyData key = objectKeyTransfer.getSourceKey(sourceData);
             if (key == null) continue;
             List<TargetData> targetDataNode = targetDataMap.get(key);
-            if (targetDataNode == null && targetDataNode.size() == 0) continue;
+            if (targetDataNode == null || targetDataNode.size() == 0) continue;
             for (TargetData targetData : targetDataNode) {
                 if (compareDataSuccess != null) try {
                     compareDataSuccess.compareDataSuccess(sourceData, targetData);
