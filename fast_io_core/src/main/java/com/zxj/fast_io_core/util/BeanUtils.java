@@ -100,7 +100,7 @@ public final class BeanUtils {
      */
     public static Object getProperty(Object source, Field field)
             throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        if (source == null||source==null)
+        if (source == null || field == null)
             return null;
         field.setAccessible(true);
         return field.get(source);
@@ -116,10 +116,8 @@ public final class BeanUtils {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    public static Object getProperty(Object source, String fieldName)
-            throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        if (source == null)
-            return null;
+    public static Object getProperty(Object source, String fieldName) throws  IllegalAccessException {
+        if (source == null) return null;
         // 获得指定类的属性
         Field field = getField(source, fieldName);
         // 值为 true 则指示反射的对象在使用时应该取消 Java 语言访问检查。值为 false 则指示反射的对象应该实施 Java 语言访问检查。
@@ -139,7 +137,7 @@ public final class BeanUtils {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    public static Object getPropertys(Object source, String fieldName) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+    public static Object getPropertys(Object source, String fieldName) throws  IllegalAccessException {
         String[] fieldNames = fieldName.split("\\.");
         Object obj = source;
         for (int i = 0; i < fieldNames.length; i++) {
@@ -187,8 +185,6 @@ public final class BeanUtils {
                     setProperty(target, field.getName(), obj);
                     if (enableLog) System.out.println("name:" + field.getName() + ",obj:" + obj);
                 }
-            } catch (IntrospectionException e) {
-                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
