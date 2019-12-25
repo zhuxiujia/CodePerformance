@@ -257,6 +257,11 @@ public class ListUtil {
     }
 
 
+    public static  <SourceData, TargetData> ComparData<SourceData, TargetData> compareSetData(){
+        return new ComparData<SourceData, TargetData>();
+    }
+
+
     /**
      * 批量设置属性
      *
