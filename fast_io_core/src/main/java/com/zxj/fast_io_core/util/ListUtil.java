@@ -257,8 +257,10 @@ public class ListUtil {
     }
 
 
-    public static  <SourceData, TargetData> ComparData<SourceData, TargetData> compareSetData(){
-        return new ComparData<SourceData, TargetData>();
+    public static <SourceData, TargetData> ComparData<SourceData, TargetData> compareSetData(List<SourceData> sources, List<TargetData> dataList) {
+        ComparData<SourceData, TargetData> c = new ComparData<SourceData, TargetData>();
+        c = c.from(sources, dataList);
+        return c;
     }
 
 
