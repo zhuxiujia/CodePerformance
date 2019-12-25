@@ -198,6 +198,7 @@ public class ListUtil {
     }
 
 
+
     /**
      * 批量设置数据属性
      *
@@ -217,6 +218,43 @@ public class ListUtil {
                 e.printStackTrace();
             }
         }, null);
+    }
+
+
+
+
+    /**
+     * 批量设置属性
+     *
+     * @param sources
+     * @param dataList
+     * @param sourceDataStringTransfer
+     * @param targetDataStringTransfer
+     * @param afterSetDataListener
+     * @param <SourceData>
+     * @param <TargetData>
+     * @param <KeyData>
+     * @return
+     */
+    public static <SourceData, TargetData, KeyData> List<SourceData> compareSetData(List<SourceData> sources, List<TargetData> dataList, ListUtil.StringTransfer<SourceData> sourceDataStringTransfer, ListUtil.StringTransfer<TargetData> targetDataStringTransfer, AfterSetDataListener<SourceData, TargetData> afterSetDataListener) {
+        return compareDealWithData(sources, dataList, new ObjectKeyTransfer<String, SourceData, TargetData>() {
+
+            @Override
+            public String getSourceKey(SourceData f) {
+                return sourceDataStringTransfer.transfer(f);
+            }
+
+            @Override
+            public String getTargetKey(TargetData t) {
+                return targetDataStringTransfer.transfer(t);
+            }
+        }, (t, data) -> {
+            try {
+                BeanUtils.invokeSetData(t, data, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, afterSetDataListener);
     }
 
 
