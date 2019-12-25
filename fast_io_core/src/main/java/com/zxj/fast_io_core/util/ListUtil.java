@@ -233,10 +233,9 @@ public class ListUtil {
      * @param afterSetDataListener
      * @param <SourceData>
      * @param <TargetData>
-     * @param <KeyData>
      * @return
      */
-    public static <SourceData, TargetData, KeyData> List<SourceData> compareSetData(List<SourceData> sources, List<TargetData> dataList, ListUtil.StringTransfer<SourceData> sourceDataStringTransfer, ListUtil.StringTransfer<TargetData> targetDataStringTransfer, AfterSetDataListener<SourceData, TargetData> afterSetDataListener) {
+    public static <SourceData, TargetData> List<SourceData> compareSetData(List<SourceData> sources, List<TargetData> dataList, ListUtil.StringTransfer<SourceData> sourceDataStringTransfer, ListUtil.StringTransfer<TargetData> targetDataStringTransfer, AfterSetDataListener<SourceData, TargetData> afterSetDataListener) {
         return compareDealWithData(sources, dataList, new ObjectKeyTransfer<String, SourceData, TargetData>() {
 
             @Override
