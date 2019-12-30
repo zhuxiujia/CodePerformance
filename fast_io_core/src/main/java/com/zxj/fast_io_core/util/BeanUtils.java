@@ -186,7 +186,7 @@ public final class BeanUtils {
                     if (enableLog) System.out.println("name:" + field.getName() + ",obj:" + obj);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 

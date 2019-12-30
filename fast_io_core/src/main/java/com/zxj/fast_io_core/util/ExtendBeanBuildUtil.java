@@ -111,8 +111,6 @@ public class ExtendBeanBuildUtil {
         try {
             child = childClass.newInstance();
         } catch (Exception e) {
-            System.out.println("childClass.newInstance() fail" + childClass.getName());
-            e.printStackTrace();
             return null;
         }
         child = (Child) BeanUtils.convertToSubclass(arg, child);
@@ -131,8 +129,6 @@ public class ExtendBeanBuildUtil {
         try {
             father = fatherClass.newInstance();
         } catch (Exception e) {
-            System.out.println("fatherClass.newInstance() fail" + fatherClass.getName());
-            e.printStackTrace();
             return null;
         }
         father = (Child) BeanUtils.convertToSubclass(arg, father);

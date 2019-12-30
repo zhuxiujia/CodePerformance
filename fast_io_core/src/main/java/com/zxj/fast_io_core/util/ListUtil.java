@@ -191,7 +191,7 @@ public class ListUtil {
                 if (resultList == null) resultList = new ArrayList<>();
                 resultList.add(result);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return resultList;
@@ -215,7 +215,7 @@ public class ListUtil {
             try {
                 BeanUtils.invokeSetData(t, data, null);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }, null);
     }
@@ -251,7 +251,7 @@ public class ListUtil {
             try {
                 BeanUtils.invokeSetData(t, data, null);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }, afterSetDataListener);
     }
@@ -281,7 +281,7 @@ public class ListUtil {
             try {
                 BeanUtils.invokeSetData(t, data, null);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }, afterSetDataListener);
     }
@@ -355,7 +355,7 @@ public class ListUtil {
                     BeanUtils.invokeSetData(t, data, listCompareSetDataItem.localNeedSetPropertyName());
                     if (afterSetDataListener != null) afterSetDataListener.setData(t, data);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             });
         }
@@ -373,14 +373,14 @@ public class ListUtil {
                 try {
                     afterSetDataListener.setData(source);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
             if (endForEach != null) {
                 try {
                     endForEach.end(sources);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }
@@ -407,7 +407,7 @@ public class ListUtil {
             try {
                 key = objectKeyTransfer.getTargetKey(targetData);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             if (key == null) continue;
             List<TargetData> targetDataNode = targetDataMap.get(key);
@@ -429,12 +429,12 @@ public class ListUtil {
                 if (compareDataSuccess != null) try {
                     compareDataSuccess.compareDataSuccess(sourceData, targetData);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
-                if (afterSetDataListener != null) try {
+                if (afterSetDataListener != null && sourceData != null) try {
                     afterSetDataListener.setData(sourceData, targetData);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }
